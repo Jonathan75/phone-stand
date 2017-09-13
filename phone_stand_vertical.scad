@@ -48,9 +48,10 @@ module plug_holder_at_angel(){
 
 
 module base_with_hole(){
+    d = holder_d+(wall*2);
     difference(){
-        rotate([45,0,0]) translate([0,1.5,0]) cube([base_w,wall,holder_d+(wall*2)], center=false);   
-        translate([(base_w/2),0,8]) plug_holder(true);            
+        rotate([45,0,0]) translate([0,1.5,0]) cube([base_w,wall,d], center=false);   
+        translate([(base_w/2),d*-.25,8]) plug_holder(true);            
     }
 }
 
