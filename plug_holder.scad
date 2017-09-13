@@ -1,7 +1,8 @@
-module box(h,w,d,wall,t){
+module box(w,h,d,wall,t){
     difference(){
-        cube([w+wall,d+wall,h+wall], center=true); // outside
-        translate([0,0,wall+t]) cube([w-t,d-t,h], center=true); // inside    
+        //[width,depth,height]
+        cube([w+wall+t,h+wall+t,d+wall+t], center=true); // outside
+        translate([0,0,wall]) cube([w-t,h-t,d+t], center=true); // inside    
     }
 }
 
@@ -15,26 +16,25 @@ module plug_holder(blockonly) {
 
     
     module plug_block(){
-        cube([h+wall-t,d+wall,w+wall], center=true);   
+        cube([w+wall+t,d+wall+t,h+wall+t], center=true);   
     }
     
     module main() {
-        box(w,h,d,wall,t);
+        box(w,d,h,wall,t);
     }
     
     module main_with_holes(){
-        hole_w = h-wall+t;
+        hole_w = w-wall+t;
         module hole(){
-cube([hole_w,wall*3,w+wall], center=true);
-         }
+            cube([hole_w,wall*3,h+wall], center=true);
+        }
         
         difference(){
             difference(){ 
                 main();
-                translate([0,h,wall*2]) hole();
+                translate([0,h,wall*4]) hole();
             }
-            translate([0,h*-1,wall*2]) hole();
-            //cube([h/2,wall*3,w+wall], center=true);
+            translate([0,h*-1,wall*4]) hole();
         }
     }
     rotate([45,0,0]) { 

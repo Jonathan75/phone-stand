@@ -1,12 +1,12 @@
 include <plug_holder.scad>
-t = 0.3; //tolerance
-base_w = 87.55+t;
-base_d = 60;
+wall = 2;
+t = 0.4; //tolerance
+base_w = 87.55+wall+t;
+base_d = 120;
 
 holder_w = 9;
 holder_d = 13;
 holder_h = 34;
-wall = 2;
 
 module base() { 
     difference() {
@@ -43,26 +43,26 @@ module holder() {
 }
 
 module plug_holder_at_angel(){
-    translate([(base_w/2),-7,1]) plug_holder(false);
+    translate([(base_w/2),-10,-2]) plug_holder(false);
 }
 
 
 module base_with_hole(){
     difference(){
-        rotate([45,0,0]) translate([0,1.5,0]) cube([base_w,4,holder_d+(wall*2)], center=false);   
+        rotate([45,0,0]) translate([0,1.5,0]) cube([base_w,wall,holder_d+(wall*2)], center=false);   
         translate([(base_w/2),0,8]) plug_holder(true);            
     }
 }
 
-support_h = 9;
-translate([0,20,support_h]){
+support_h = 16;
+translate([0,15,support_h]){
     holder();
     mirror([180,0,0]) { translate([base_w*-1,0,0]) {holder();} }
     base_with_hole();
     plug_holder_at_angel();
 } 
 
-translate([0,20,0]){
+translate([0,7,0]){
     support(0);
     support(base_w-holder_w);
 }
