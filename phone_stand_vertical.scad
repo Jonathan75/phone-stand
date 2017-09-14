@@ -43,7 +43,7 @@ module holder() {
 
 module plug_holder_at_angel(){
     m = -12;
-    translate([(base_w/2),m,m+12]) plug_holder(false);
+    translate([(base_w/2),m,m+11]) plug_holder(false);
 }
 
 
@@ -51,11 +51,11 @@ module base_with_hole(){
     d = holder_d+(wall*2);
     difference(){
         rotate([45,0,0]) translate([0,1.5,0]) cube([base_w,1,d], center=false);   
-        translate([(base_w/2),d*-.25,8]) plug_holder(true);            
+        translate([(base_w/2),d*-.25,7]) plug_holder(true);            
     }
 }
 
-support_z = 13;
+support_z = 14;
 support_x = 19;
 translate([0,support_x,support_z]){
     holder();
