@@ -10,8 +10,8 @@ module plug_holder(blockonly) {
     t = 0.4; //tolerance
     wall = 1;
     half_wall = wall*0.5; 
-    h = 11;
-    w = 8.77;
+    h = 8.77;
+    w = 11;
     d = 23.38;
 
     
@@ -32,9 +32,9 @@ module plug_holder(blockonly) {
         difference(){
             difference(){ 
                 main();
-                translate([0,h,wall*4]) hole();
+                translate([0,w,wall*4]) hole();
             }
-            translate([0,h*-1,wall*4]) hole();
+            translate([0,w*-1,wall*4]) hole();
         }
     }
     rotate([45,0,0]) { 
