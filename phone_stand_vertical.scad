@@ -19,9 +19,9 @@ base();
 
 module support(t) { 
     hull(){
-        translate([t,15,0]) { 
-            cube([holder_w,1,25], center=false);
-            rotate([90,0,0]) translate([0,0,4]) cube([holder_w,2,19], center=false);
+        translate([t,30,0]) { 
+            cube([wall,1,39], center=false);
+            rotate([90,0,0]) translate([0,0,4]) cube([wall,1,34], center=false);
         }
     }
 }
@@ -42,7 +42,7 @@ module holder() {
 }
 
 module plug_holder_at_angel(){
-    m = -13;
+    m = -11;
     translate([(base_w/2),m,m+11]) plug_holder(false);
 }
 
@@ -55,7 +55,7 @@ module base_with_hole(){
     }
 }
 
-support_z = 14;
+support_z = 12;
 support_x = 19;
 translate([0,support_x,support_z]){
     holder();
@@ -66,7 +66,7 @@ translate([0,support_x,support_z]){
 
 translate([0,support_x-4,0]){
     support(0);
-    support(base_w-holder_w);
+    support(base_w-wall);
 }
 
 
