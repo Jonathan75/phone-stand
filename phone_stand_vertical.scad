@@ -9,9 +9,10 @@ holder_d = 13;
 holder_h = 34;
 
 module base() { 
+    boarder = 5;
     difference() {
         cube([base_w,base_d,wall], center=false);
-        translate([holder_w,10,d]) cube([base_w-(holder_w*2),base_d-20,2], center=false); 
+        translate([boarder,boarder,d]) cube([base_w-(boarder*2),base_d-(boarder*2),2], center=false); 
     }
 } 
 base();
@@ -55,7 +56,7 @@ module base_with_hole(){
     }
 }
 
-support_z = 12;
+support_z = 13;
 support_x = 19;
 translate([0,support_x,support_z]){
     holder();
