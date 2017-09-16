@@ -37,10 +37,8 @@ module plug_holder(blockonly) {
             translate([0,w*-1,wall*4]) hole();
         }
     }
-    rotate([45,0,0]) { 
-            if (blockonly) plug_block(wall);
+    if (blockonly) plug_block(wall);
             else  main_with_holes();
-    }
 }
 //plug_holder(true);
 //plug_holder(false);

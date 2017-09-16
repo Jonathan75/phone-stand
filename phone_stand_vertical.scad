@@ -5,7 +5,7 @@ base_w = 88+wall+t;
 base_d = 120;
 
 holder_w = 9;
-holder_d = 13;
+holder_d = 13-3;
 holder_h = 34;
 
 module base() { 
@@ -17,12 +17,11 @@ module base() {
 } 
 base();
 
-
 module support(t) { 
     hull(){
-        translate([t,30,0]) { 
-            cube([wall,1,39], center=false);
-            rotate([90,0,0]) translate([0,0,4]) cube([wall,1,34], center=false);
+        translate([t,41,0]) { 
+            cube([wall,1,41], center=false);
+            rotate([90,0,0]) translate([0,0,4]) cube([wall,1,37], center=false);
         }
     }
 }
@@ -33,7 +32,7 @@ module holder() {
     h = holder_h;
     
     translate([0,-8,d]) {
-        rotate([-45,0,0]) { 
+        rotate([-90,0,0]) { 
             difference() {
                 cube([w,d+(wall*2),h], center=false);      
                 translate([wall,wall,wall]) cube([w-wall,d,h-wall], center=false);      
@@ -42,37 +41,29 @@ module holder() {
      }
 }
 
-module plug_holder_at_angel(){
-    m = -11;
-    translate([(base_w/2),m,m+11]) plug_holder(false);
-}
-
-
 module holder_bottom(){
     d = holder_d+(wall*2);
     w = base_w;
     h = wall;
-    difference(){
-        rotate([45,0,0]) translate([0,3,0]) cube([w,h,d], center=false);   
-        translate([(base_w/2),d*-.25,7]) plug_holder(true);            
-    }
-    rotate([-45,0,0]) translate([0,-1,-18]) cube([w,h,22], center=false);   
+    plug_holder_move = [(base_w/2),-19.5,4];
     
+    difference(){
+        translate([w*.5,-8,4]) cube([w,h,d], center=true);  
+        translate(plug_holder_move) plug_holder(true);            
+    }
+    translate([45,-20,-1.5]) cube([w-wall,23.5,h], center=true);   
+    translate(plug_holder_move) plug_holder(false);
 }
 
-support_z = 13;
-support_x = 19;
-translate([0,support_x,support_z]){
+translate([0,22,24]) rotate([45,0,0]) {
     holder();
     mirror([180,0,0]) translate([base_w*-1,0,0]) holder(); 
     holder_bottom();
-    plug_holder_at_angel();
 } 
 
-translate([0,support_x-4,0]){
-    support(0);
-    support(base_w-wall);
-}
+
+support(0);
+support(base_w-wall);
 
 
 
