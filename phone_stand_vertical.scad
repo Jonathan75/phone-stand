@@ -9,7 +9,7 @@ holder_d = 13;
 holder_h = 34;
 
 module base() { 
-    boarder = 5;
+    boarder = 6;
     difference() {
         cube([base_w,base_d,wall], center=false);
         translate([boarder,boarder,d]) cube([base_w-(boarder*2),base_d-(boarder*2),2], center=false); 
@@ -48,12 +48,16 @@ module plug_holder_at_angel(){
 }
 
 
-module base_with_hole(){
+module holder_bottom(){
     d = holder_d+(wall*2);
+    w = base_w;
+    h = wall;
     difference(){
-        rotate([45,0,0]) translate([0,3,0]) cube([base_w,wall,d], center=false);   
+        rotate([45,0,0]) translate([0,3,0]) cube([w,h,d], center=false);   
         translate([(base_w/2),d*-.25,7]) plug_holder(true);            
     }
+    rotate([-45,0,0]) translate([0,-1,-18]) cube([w,h,22], center=false);   
+    
 }
 
 support_z = 13;
@@ -61,7 +65,7 @@ support_x = 19;
 translate([0,support_x,support_z]){
     holder();
     mirror([180,0,0]) translate([base_w*-1,0,0]) holder(); 
-    base_with_hole();
+    holder_bottom();
     plug_holder_at_angel();
 } 
 
