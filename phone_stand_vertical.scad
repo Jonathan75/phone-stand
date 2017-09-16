@@ -10,9 +10,10 @@ holder_h = 34;
 
 module base() { 
     boarder = 6;
+    h = wall*2.5;
     difference() {
-        cube([base_w,base_d,wall], center=false);
-        translate([boarder,boarder,d]) cube([base_w-(boarder*2),base_d-(boarder*2),2], center=false); 
+        cube([base_w,base_d,h], center=false);
+        translate([boarder,boarder,d]) cube([base_w-(boarder*2),base_d-(boarder*2),h], center=false); 
     }
 } 
 base();
