@@ -1,11 +1,11 @@
 include <plug_holder.scad>
 wall = 1;
 t = 0.4; //tolerance
-base_w = 88+wall+t;
+base_w = 77+wall+t;
 base_d = 120;
 
 holder_w = 9;
-holder_d = 13-3;
+holder_d = 11.32;
 holder_h = 34;
 
 module base() { 
@@ -52,11 +52,11 @@ module holder_bottom(){
         translate([w*.5,-8,4]) cube([w,h,d], center=true);  
         translate(plug_holder_move) plug_holder(true);            
     }
-    translate([45,-20,-1.5]) cube([w-wall,23.5,h], center=true);   
+    translate([(w*.5),-20,-1.5]) cube([w-wall,23.5,h], center=true);   
     translate(plug_holder_move) plug_holder(false);
 }
 
-translate([0,22,24]) rotate([45,0,0]) {
+translate([0,22,24]) rotate([90,0,0]) {
     holder();
     mirror([180,0,0]) translate([base_w*-1,0,0]) holder(); 
     holder_bottom();

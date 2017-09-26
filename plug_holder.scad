@@ -10,9 +10,12 @@ module plug_holder(blockonly) {
     t = 0.4; //tolerance
     wall = 1;
     half_wall = wall*0.5; 
-    h = 8.77;
-    w = 11;
-    d = 23.38;
+//    h = 12.82; //h
+//    w = 6.75; //w
+//    d = 8.77; //d
+    h = 10;
+    w = 10;
+    d = 100;
 
     
     module plug_block(){
@@ -20,25 +23,23 @@ module plug_holder(blockonly) {
     }
     
     module main() {
-        box(w,d,h,wall,t);
+        box(w,h,h,wall,t);
     }
     
     module main_with_holes(){
-        hole_w = w-wall+t;
+        hole_d = d-wall+t;
         module hole(){
-            cube([hole_w,wall*3,h+wall], center=true);
+            cube([wall*2,hole_d,h+wall+t], center=true);
         }
         
-        difference(){
-            difference(){ 
-                main();
-                translate([0,w,wall*4]) hole();
-            }
-            translate([0,w*-1,wall*4]) hole();
+        difference(){ 
+            main();
+            translate([w*.5 ,0,wall*1.5]) hole();
+            translate([w*-.5,0,wall*1.5]) hole();
         }
     }
     if (blockonly) plug_block(wall);
             else  main_with_holes();
 }
 //plug_holder(true);
-//plug_holder(false);
+plug_holder(false);
