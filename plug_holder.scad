@@ -1,9 +1,21 @@
+/*
+function box_outside(w,d,h,wall,t) = {
+  wt2 = (wall+t)*2,
+  cube([w+wt2,d+wt2,h+wall+t], center=true); // outside
+}
+
+function box_inside(w,d,h,wall,t) = {
+  translate([0,0,wall-t]) cube([w+t,d+t,h+t], center=true); // inside
+}*/
+
 module box(w,d,h,wall,t){
     difference(){
         wt2 = (wall+t)*2;
         //[width,depth,height]
         cube([w+wt2,d+wt2,h+wall+t], center=true); // outside
         translate([0,0,wall-t]) cube([w+t,d+t,h+t], center=true); // inside
+        /*box_outside(w,d,h,wall,t);
+        box_inside(w,d,h,wall,t);*/
     }
 }
 
@@ -13,10 +25,11 @@ module plug_holder(blockonly) {
     half_wall = wall*0.5;
     w = 18.7;
     h = 6.62;
-    d = 12.54; 
+    d = 12.54;
 
     module plug_block(){
-        cube([w+wall+t,d+wall+t,h+wall+t], center=true);
+      tw = (t+wall)*2;
+      cube([w+tw,d+tw,h+t+wall], center=true);
     }
 
     module main() {
@@ -40,4 +53,4 @@ module plug_holder(blockonly) {
             else  main_with_holes();
 }
 //plug_holder(true);
-plug_holder(false);
+/*plug_holder(false);*/
